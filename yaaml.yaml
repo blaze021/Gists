@@ -1,0 +1,111 @@
+Certainly! If you're not using Istio or any other service mesh, you can implement a simple canary deployment using Kubernetes Deployments and Services. In this example, I'll demonstrate a canary deployment using native Kubernetes constructs.
+
+1. **Stable Version Deployment:**
+
+   ```yaml
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: my-service-stable
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: my-service
+         version: stable
+     template:
+       metadata:
+         labels:
+           app: my-service
+           version: stable
+       spec:
+         containers:
+         - name: my-service
+           image: your-registry/my-service:stable
+           # Add other container settings as needed
+   ```
+
+2. **Canary Version Deployment:**
+
+   ```yaml
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: my-service-canary
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: my-service
+         version: canary
+     template:
+       metadata:
+         labels:
+           app: my-service
+           version: canary
+       spec:
+         containers:
+         - name: my-service
+           image: your-registry/my-service:canary
+           # Add other container settings as needed
+   ```
+
+3. **Service for Stable Version:**
+
+   ```yaml
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: my-service
+   spec:
+     selector:
+       app: my-service
+       version: stable
+     ports:
+       - protocol: TCP
+         port: 80
+         targetPort: 8080  # Assuming your service listens on port 8080
+   ```
+
+4. **Service for Canary Version:**
+
+   ```yaml
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: my-service-canary
+   spec:
+     selector:
+       app: my-service
+       version: canary
+     ports:
+       - protocol: TCP
+         port: 80
+         targetPort: 8080  # Assuming your service listens on port 8080
+   ```
+
+5. **Ingress or External Service Exposure (Optional):**
+
+   If your services need to be exposed externally, you might need to create an Ingress resource or expose the services using LoadBalancer or NodePort services.
+
+6. **Gradual Traffic Shifting:**
+
+   You can manually adjust the traffic between the stable and canary versions by updating the service selectors. For example, to gradually shift traffic to the canary version, you might update the `my-service` Service to point to the `my-service-canary` Deployment.
+
+   ```bash
+   kubectl apply -f stable-service.yaml
+   ```
+
+   Then, gradually update the service selector to include both stable and canary versions:
+
+   ```bash
+   kubectl apply -f canary-service.yaml
+   ```
+
+   This will route some traffic to the canary version.
+
+7. **Monitor and Adjust:**
+
+   Monitor your application using Kubernetes tools like logs, events, and metrics. Adjust the service selectors based on your observations to control the traffic distribution.
+
+Remember to customize these YAML files based on your specific requirements and adjust the deployment and service settings as needed for your application.

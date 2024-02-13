@@ -1,3 +1,4 @@
+'''
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -20,6 +21,7 @@ spec:
           echo "Another command"
         - |
           echo "Yet another command"
+'''
 
 
 

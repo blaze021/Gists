@@ -1,3 +1,71 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: my-container
+        image: your-image-name:your-tag
+        command: ["/bin/bash", "-c"]
+        args:
+        - |
+          echo "Running command 1"
+          command1
+          echo "Running command 2"
+          command2
+          # Add more commands as needed
+        - |
+          echo "Another command"
+        - |
+          echo "Yet another command"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Gists
 Sure, here's a tabular summary of the weekly balanced vegetarian diet plan for a person with 105 kg weight:
 

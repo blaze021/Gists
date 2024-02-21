@@ -1,4 +1,17 @@
 ```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap
+data:
+  my-yaml-file.yaml: |
+    apiVersion: ...
+    # Add more YAML configurations here
+```
+
+
+```
+
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -13,14 +26,25 @@ spec:
         args:
         - |
           echo "Running command 1"
+          kubectl apply -f /config/my-yaml-file.yaml
           command1
           echo "Running command 2"
           command2
           # Add more commands as needed
-        - |
+          wait
           echo "Another command"
+          # Add more commands after the wait
         - |
           echo "Yet another command"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: my-configmap
+
+
 ```
 
 

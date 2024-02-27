@@ -1,4 +1,84 @@
 ```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-policy
+  namespace: your-namespace
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+
+
+
+```
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-browser
+  namespace: your-namespace
+spec:
+  podSelector: {}
+  ingress:
+  - ports:
+    - port: 80  # Allow incoming traffic on port 80 (HTTP)
+    - port: 443 # Allow incoming traffic on port 443 (HTTPS)
+    from:
+    - podSelector: {}
+
+```
+
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-specific-namespaces
+  namespace: your-namespace
+spec:
+  podSelector: {}
+  ingress:
+  - ports:
+    - port: 80  # Allow incoming traffic on port 80 (HTTP)
+    - port: 443 # Allow incoming traffic on port 443 (HTTPS)
+    from:
+    - podSelector: {}
+      namespaceSelector:
+        matchLabels:
+          namespace-label-key: namespace-label-value
+    - podSelector: {}
+      namespaceSelector:
+        matchLabels:
+          another-namespace-label-key: another-namespace-label-value
+
+```
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-and-egress
+  namespace: your-namespace
+spec:
+  podSelector: {}
+  ingress:
+  - ports:
+    - port: 80  # Allow incoming traffic on port 80 (HTTP)
+    - port: 443 # Allow incoming traffic on port 443 (HTTPS)
+  egress:
+  - to:
+    - podSelector: {}
+      namespaceSelector:
+        matchLabels:
+          namespace-label-key: namespace-label-value
+    - podSelector: {}
+      namespaceSelector:
+        matchLabels:
+          another-namespace-label-key: another-namespace-label-value
+
+```
+
+```
 "############################################################################
 "
 " ooooo        ooooo ooooo      ooo ooooo     ooo ooooooo  ooooo 

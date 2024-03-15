@@ -13,6 +13,8 @@ To alleviate the privilege restrictions imposed on container_t, you can allow th
 This project crates a new process label type gremlin.process and adds all the necessary privileges Gremlin needs, so that you can grant them to Gremlin only, and nothing else.
 
 Gremlin builds on the SELinux inheritance patterns set out in containers/udica, providing Gremlin privileges on top of standard container privileges. See the policy here.
+
+https://github.com/gremlin/selinux-policies
 ```
 
 

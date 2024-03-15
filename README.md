@@ -1,4 +1,22 @@
 ```
+When Gremlin is installed into an SELinux system as a container (e.g Docker constainer, Kubernetes daemonset), the container runtime that manages Gremlin will run the Gremlin processes under the SELinux process label type container_t. Gremlin performs some actions that are not allowed by this process label:
+
+    Install and manipulate files on the host: /var/lib/gremlin, /var/log/gremlin
+    Load kernel modules for manipulating network transactions during network attacks, such as net_sch
+    Communicate with the container runtime socket (e.g. /var/run/docker.sock) to launch containers that carry out attacks
+    Read files in /proc
+
+When you install Gremlin as root directly onto your host machines, you likely do not need to install any of these policies, as Gremlin should run under SELinux process label type unconfined_t.
+
+To alleviate the privilege restrictions imposed on container_t, you can allow these privileges to container_t, providing Gremlin with everything it needs, but this would also give the same privileges to all other containers on your system, which is not ideal.
+
+This project crates a new process label type gremlin.process and adds all the necessary privileges Gremlin needs, so that you can grant them to Gremlin only, and nothing else.
+
+Gremlin builds on the SELinux inheritance patterns set out in containers/udica, providing Gremlin privileges on top of standard container privileges. See the policy here.
+```
+
+
+```
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:

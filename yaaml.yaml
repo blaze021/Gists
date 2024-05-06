@@ -22,34 +22,6 @@ Here for each array element:
 1) cronschedule would be the scheduled time in US/Eastern timezone in which the pods will scale.
 2) instances will be the no of replicas running for your deployment. So for example if you want to scale down your application to 0 instances, you'll have to specify the instances to zero.
 
-## AppConfig Configuration
-
-### ConfigMap Creation
-
-1. Create a ConfigMap named `app-config` in your Kubernetes cluster. This ConfigMap will hold the AppConfig data.
-
-    ```yaml
-    kubectl create configmap app-config --from-file=appconfig.yml
-    ```
-
-    The `appconfig.yml` file should contain your AppConfig data. Example:
-
-    ```yaml
-    cronvalues:
-      - cronschedule: "0 22 * * *"
-        instances: "0"
-      - cronschedule: "0 18 * * *"
-        instances: "1"
-      - cronschedule: "0 7 * * *"
-        instances: "3"
-    ```
-
-2. Apply the ConfigMap to the Kubernetes cluster:
-
-    ```bash
-    kubectl apply -f app-config.yaml
-    ```
-
 ### HelmRelease Configuration
 
 1. In your Helm chart's `values.yaml` file, configure the HelmRelease to reference the AppConfig stored in the ConfigMap.

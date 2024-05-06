@@ -24,7 +24,7 @@ Here for each array element:
 
 ### HelmRelease Configuration
 
-1. In your Helm chart's `values.yaml` file, configure the HelmRelease to reference the AppConfig stored in the ConfigMap.
+1. In your _appconfig/gitops//<cluster>/<namespace>/<app_name>-<env>/resources/`app-helm-release.yaml` file, configure the HelmRelease to reference the ConfigMap stored in the saame folder as app-cronconfig.yaml.
 
     ```yaml
     helmReleases:
@@ -36,14 +36,11 @@ Here for each array element:
               name: app-config
               key: appconfig.yml
     ```
-
-2. Ensure that your Helm chart's templates properly use the values from the AppConfig within the `my-application-chart/templates` directory.
-
 ## Kustomization Integration
 
-To include the `appconfig.yml` in the kustomization, follow these steps:
+To include the `app-cronconfig.yml` in the kustomization, follow these steps:
 
-1. Create a `kustomization.yaml` file in the root of your Kubernetes manifests directory (if not already created).
+1. Add the file in the root of your Kustomiztion manifest.
 
     ```yaml
     apiVersion: kustomize.config.k8s.io/v1beta1
@@ -51,16 +48,6 @@ To include the `appconfig.yml` in the kustomization, follow these steps:
     resources:
       - appconfig.yaml
     ```
-
-2. Apply the kustomization to your Kubernetes cluster:
-
-    ```bash
-    kubectl apply -k .
-    ```
-
-## Conclusion
-
-By following the steps outlined in this documentation, you can effectively manage your application's configuration using AppConfig stored in a ConfigMap, integrate it with HelmRelease's valuesFrom feature, and include it in the kustomization for streamlined deployment and configuration management.
 
 ---
 

@@ -6,7 +6,21 @@ Certainly! Below is a README.md version of the documentation:
 
 ## Overview
 
-This document provides guidance on configuring the application using AppConfig stored in a ConfigMap and integrating it with HelmRelease's valuesFrom functionality. Additionally, it includes instructions on how to add the `appconfig.yml` to the kustomization.
+This document provides guidance on configuring the cron based application using config stored in values.yaml as a ConfigMap . 
+
+```
+cronvalues:
+  - cronschedule: "0 22 * * *"
+    instances: "0"
+  - cronschedule: "0 18 * * *"
+    instances: "1"
+  - cronschedule: "0 7 * * *"
+    instances: "3"
+```
+
+Here for each array element:
+1) cronschedule would be the scheduled time in US/Eastern timezone in which the pods will scale.
+2) instances will be the no of replicas running for your deployment. So for example if you want to scale down your application to 0 instances, you'll have to specify the instances to zero.
 
 ## AppConfig Configuration
 

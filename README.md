@@ -1,4 +1,120 @@
 ```
+
+Creating a structured Flask API with the specified folder structure involves organizing your code in a modular way, making it easier to manage and maintain. Here’s a step-by-step guide with the example code for each file:
+
+### Folder Structure
+```
+my_flask_app/
+├── app.py
+├── routes/
+│   ├── __init__.py
+│   ├── flux.py
+│   ├── kube_ctl.py
+│   └── helmctl.py
+└── utils/
+    ├── __init__.py
+    └── util.py
+```
+
+### 1. app.py
+This is the main file that initializes the Flask application and registers the blueprints.
+
+```python
+from flask import Flask
+from routes.flux import flux_bp
+from routes.kube_ctl import kube_ctl_bp
+from routes.helmctl import helmctl_bp
+
+app = Flask(__name__)
+
+# Register blueprints
+app.register_blueprint(flux_bp, url_prefix='/flux')
+app.register_blueprint(kube_ctl_bp, url_prefix='/kube')
+app.register_blueprint(helmctl_bp, url_prefix='/helm')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### 2. routes/flux.py
+This file defines the routes related to Flux.
+
+```python
+from flask import Blueprint, jsonify
+
+flux_bp = Blueprint('flux', __name__)
+
+@flux_bp.route('/status', methods=['GET'])
+def status():
+    return jsonify({"status": "Flux is running"})
+```
+
+### 3. routes/kube_ctl.py
+This file defines the routes related to Kubernetes control.
+
+```python
+from flask import Blueprint, jsonify
+
+kube_ctl_bp = Blueprint('kube_ctl', __name__)
+
+@kube_ctl_bp.route('/status', methods=['GET'])
+def status():
+    return jsonify({"status": "Kubernetes control is running"})
+```
+
+### 4. routes/helmctl.py
+This file defines the routes related to Helm control.
+
+```python
+from flask import Blueprint, jsonify
+
+helmctl_bp = Blueprint('helmctl', __name__)
+
+@helmctl_bp.route('/status', methods=['GET'])
+def status():
+    return jsonify({"status": "Helm control is running"})
+```
+
+### 5. utils/util.py
+This file contains utility functions that can be used across different parts of the application.
+
+```python
+def common_util_function():
+    return "This is a common utility function."
+```
+
+### 6. routes/__init__.py
+This file makes the `routes` directory a package.
+
+```python
+# This file can be empty or you can initialize something if needed.
+```
+
+### 7. utils/__init__.py
+This file makes the `utils` directory a package.
+
+```python
+# This file can be empty or you can initialize something if needed.
+```
+
+### Putting It All Together
+1. **Run the Application**: To run the application, navigate to the directory containing `app.py` and execute the command:
+    ```bash
+    python app.py
+    ```
+2. **Access the Endpoints**:
+    - Flux status: `http://127.0.0.1:5000/flux/status`
+    - Kubernetes control status: `http://127.0.0.1:5000/kube/status`
+    - Helm control status: `http://127.0.0.1:5000/helm/status`
+
+This structure organizes the code into separate files for different routes and utilities, making it modular and easier to manage.
+
+
+```
+
+
+
+```
 When Gremlin is installed into an SELinux system as a container (e.g Docker constainer, Kubernetes daemonset), the container runtime that manages Gremlin will run the Gremlin processes under the SELinux process label type container_t. Gremlin performs some actions that are not allowed by this process label:
 
     Install and manipulate files on the host: /var/lib/gremlin, /var/log/gremlin

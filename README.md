@@ -112,21 +112,7 @@ This structure organizes the code into separate files for different routes and u
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
 
 ```

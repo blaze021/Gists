@@ -1,4 +1,4 @@
-```
+
 
 Creating a structured Flask API with the specified folder structure involves organizing your code in a modular way, making it easier to manage and maintain. Here’s a step-by-step guide with the example code for each file:
 
@@ -108,9 +108,6 @@ This file makes the `utils` directory a package.
     - Helm control status: `http://127.0.0.1:5000/helm/status`
 
 This structure organizes the code into separate files for different routes and utilities, making it modular and easier to manage.
-
-
-```
 
 
 

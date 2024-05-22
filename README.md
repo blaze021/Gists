@@ -111,6 +111,24 @@ This structure organizes the code into separate files for different routes and u
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 When Gremlin is installed into an SELinux system as a container (e.g Docker constainer, Kubernetes daemonset), the container runtime that manages Gremlin will run the Gremlin processes under the SELinux process label type container_t. Gremlin performs some actions that are not allowed by this process label:
 

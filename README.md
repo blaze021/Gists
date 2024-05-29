@@ -1,4 +1,40 @@
+```
+#!/bin/bash
 
+# Get the pod information in a raw format
+pods_info=$(kubectl get pods -n default --no-headers)
+
+# Initialize an empty JSON object
+json_result='{ "result": ['
+
+# Iterate over each line of the pod information
+while IFS= read -r line; do
+  # Extract the required fields using awk
+  pod_name=$(echo $line | awk '{print $1}')
+  ready=$(echo $line | awk '{print $2}')
+  status=$(echo $line | awk '{print $3}')
+  restarts=$(echo $line | awk '{print $4}')
+  age=$(echo $line | awk '{print $5}')
+
+  # Append to the JSON object
+  json_result+='
+    {
+      "name": "'$pod_name'",
+      "ready": "'$ready'",
+      "status": "'$status'",
+      "restarts": "'$restarts'",
+      "age": "'$age'"
+    },'
+done <<< "$pods_info"
+
+# Remove the trailing comma and close the JSON array
+json_result=$(echo $json_result | sed 's/,$//')
+json_result+=' ]}'
+
+# Print the JSON object
+echo "$json_result" | jq .
+
+```
 
 Creating a structured Flask API with the specified folder structure involves organizing your code in a modular way, making it easier to manage and maintain. Here’s a step-by-step guide with the example code for each file:
 

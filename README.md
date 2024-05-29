@@ -1,4 +1,34 @@
 ```
+import subprocess
+import json
+import pandas as pd
+
+def get_pods_dataframe(namespace='default'):
+    # Execute the kubectl command and capture the output in JSON format
+    result = subprocess.run(['kubectl', 'get', 'pods', '-n', namespace, '-o', 'json'], stdout=subprocess.PIPE)
+    pods_json = json.loads(result.stdout.decode('utf-8'))
+    
+    # Extract relevant data for the DataFrame
+    pods_data = [
+        {
+            'name': item['metadata']['name'],
+            'namespace': item['metadata']['namespace'],
+            'status': item['status']['phase'],
+            'node': item['spec'].get('nodeName', ''),
+            'start_time': item['status'].get('startTime', '')
+        }
+        for item in pods_json['items']
+    ]
+    
+    # Create and return the DataFrame
+    return pd.DataFrame(pods_data)
+
+# Example usage
+df = get_pods_dataframe('default')
+print(df)
+
+```
+```
 import time
 
 class Timer:

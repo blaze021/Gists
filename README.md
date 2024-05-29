@@ -1,4 +1,26 @@
 ```
+import time
+
+class Timer:
+    def __enter__(self):
+        self.start_time = time.time()
+        return self
+
+    def __exit__(self, *args):
+        self.end_time = time.time()
+        self.elapsed_time = self.end_time - self.start_time
+        print(f"Time taken: {self.elapsed_time} seconds")
+
+# Using the context manager
+with Timer():
+    # This is the code block whose execution time is being measured
+    for i in range(1000000):
+        pass  # Replace with your actual code
+
+```
+
+
+```
 #!/bin/bash
 
 # Get the pod information in a raw format

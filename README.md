@@ -2,6 +2,7 @@
 import subprocess
 import json
 import pandas as pd
+from datetime import datetime, timezone
 
 def get_pods_dataframe(namespace='default'):
     # Execute the kubectl command and capture the output in JSON format
@@ -9,16 +10,30 @@ def get_pods_dataframe(namespace='default'):
     pods_json = json.loads(result.stdout.decode('utf-8'))
     
     # Extract relevant data for the DataFrame
-    pods_data = [
-        {
-            'name': item['metadata']['name'],
-            'namespace': item['metadata']['namespace'],
-            'status': item['status']['phase'],
-            'node': item['spec'].get('nodeName', ''),
-            'start_time': item['status'].get('startTime', '')
-        }
-        for item in pods_json['items']
-    ]
+    pods_data = []
+    for item in pods_json['items']:
+        # Extract the required fields
+        name = item['metadata']['name']
+        ready = f"{sum(1 for cs in item['status']['containerStatuses'] if cs['ready'])}/{len(item['status']['containerStatuses'])}"
+        status = item['status']['phase']
+        restarts = sum(cs['restartCount'] for cs in item['status']['containerStatuses'])
+        start_time = item['status'].get('startTime')
+        
+        # Calculate age in a human-readable format
+        if start_time:
+            start_time_dt = datetime.fromisoformat(start_time.rstrip('Z')).replace(tzinfo=timezone.utc)
+            age = datetime.now(timezone.utc) - start_time_dt
+            age_str = str(age).split('.')[0]  # Remove microseconds
+        else:
+            age_str = 'N/A'
+        
+        pods_data.append({
+            'name': name,
+            'ready': ready,
+            'status': status,
+            'restarts': restarts,
+            'age': age_str
+        })
     
     # Create and return the DataFrame
     return pd.DataFrame(pods_data)
@@ -26,6 +41,7 @@ def get_pods_dataframe(namespace='default'):
 # Example usage
 df = get_pods_dataframe('default')
 print(df)
+
 
 ```
 ```

@@ -1,4 +1,59 @@
 ```
+It looks like `script_a.sh` is getting stuck at `script_b.sh &`, which is intended to run in the background, but something in `script_b.sh` might still be causing the blocking behavior.
+
+Here are a few things to check and try to resolve the issue:
+
+### 1. **Redirect Output of `script_b.sh`:**
+   The issue might be caused by `script_b.sh` still writing to standard output or standard error. By default, even when run in the background, the script's output may still tie up the terminal and prevent `script_a.sh` from continuing.
+
+   Try redirecting both `stdout` and `stderr` to `/dev/null` to fully detach the background process:
+
+   ```bash
+   script_b.sh > /dev/null 2>&1 &
+   ```
+
+### 2. **Disown the Background Process:**
+   After putting the process in the background, you may want to disown it so that it doesn't hold up the parent process (`script_a.sh`).
+
+   ```bash
+   script_b.sh > /dev/null 2>&1 &
+   disown
+   ```
+
+   `disown` ensures that `script_a.sh` won't wait on `script_b.sh` to complete or interact with it.
+
+### 3. **Check `script_b.sh` Logic:**
+   Ensure that `script_b.sh`'s loop or any code within isn't hanging or misbehaving in such a way that it's affecting the parent script. If `script_b.sh` takes too long to initialize, it might also give the impression that `script_a.sh` is stuck.
+
+### Example `script_a.sh`:
+
+```bash
+# code here 1...
+
+# Run script_b.sh in background, with output and error redirected and process disowned
+script_b.sh > /dev/null 2>&1 &
+
+disown
+
+# code here 2 ...
+```
+
+### Example `script_b.sh`:
+
+```bash
+while true
+do
+    # Some background task
+    echo "Background process running"
+    
+    sleep 5
+done
+```
+
+This approach should allow `script_a.sh` to continue after starting `script_b.sh` in the background without being blocked.
+```
+
+```
 import subprocess
 import json
 import pandas as pd

@@ -1,4 +1,45 @@
 ```
+Here are two reviews—one for a colleague from your platform team and one for a colleague from the observability team. Each review focuses on collaboration, contributions, and areas for improvement.
+
+### Review for a Colleague from Your Platform Team:
+
+---
+
+**Collaboration and Teamwork:**  
+[Colleague's Name] has been an invaluable member of our platform team. Their ability to collaborate effectively with team members has fostered a positive work environment. They consistently share knowledge and resources, which enhances our collective understanding of Kubernetes and our deployment processes.
+
+**Contributions to Projects:**  
+They have played a crucial role in streamlining application deployments by helping implement GitOps practices within our workflows. Their technical expertise and problem-solving skills have significantly improved our efficiency, enabling us to reduce deployment times and minimize errors.
+
+**Support and Guidance:**  
+[Colleague's Name] is always willing to lend a helping hand when team members face challenges. Their mentorship has been instrumental for junior engineers, as they take the time to explain complex concepts clearly and patiently.
+
+**Areas for Improvement:**  
+One area for growth would be to take on more leadership roles in projects. By stepping up to lead initiatives or facilitate discussions, [Colleague's Name] could further enhance their influence within the team and help guide our direction.
+
+---
+
+### Review for a Colleague from the Observability Team:
+
+---
+
+**Collaboration and Communication:**  
+[Colleague's Name] has been a key partner in our efforts to improve system observability. Their clear communication and willingness to collaborate have made integrating observability tools with our platform seamless. They actively engage in discussions, ensuring our teams are aligned on goals and strategies.
+
+**Technical Contributions:**  
+Their contributions to enhancing our monitoring and alerting systems have been outstanding. By implementing robust observability practices, they have helped our platform team gain deeper insights into system performance, allowing us to proactively address issues before they escalate.
+
+**Problem-Solving and Innovation:**  
+[Colleague's Name] consistently brings innovative ideas to the table, suggesting new tools and methodologies that can improve our overall observability. Their analytical skills and creativity have led to several enhancements in our monitoring systems.
+
+**Areas for Improvement:**  
+While [Colleague's Name] excels in technical contributions, they could benefit from involving the platform team earlier in the design and implementation phases of observability projects. This would ensure that our insights and requirements are integrated from the outset, resulting in more cohesive solutions.
+
+---
+
+Feel free to customize these reviews with specific examples or names, and let me know if you’d like to make any adjustments!
+```
+```
 When writing a review for your manager, it’s important to provide constructive, honest, and balanced feedback. Focus on leadership, communication, support, and any areas of improvement. Here’s a structure you can follow:
 
 ### 1. **Leadership and Direction**

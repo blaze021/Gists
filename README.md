@@ -1,4 +1,52 @@
 ```
+When writing a review for your manager, it’s important to provide constructive, honest, and balanced feedback. Focus on leadership, communication, support, and any areas of improvement. Here’s a structure you can follow:
+
+### 1. **Leadership and Direction**
+   - **What to Highlight**: Evaluate how well your manager sets the vision and provides clear direction for the team.
+   - **Example**: “My manager consistently provides a clear strategic direction for the team. They ensure that we align with broader business objectives and help break down complex goals into manageable tasks. Their ability to communicate the bigger picture motivates the team and keeps us focused.”
+
+### 2. **Support and Guidance**
+   - **What to Highlight**: Mention the level of support your manager offers in helping you achieve your goals.
+   - **Example**: “They are always available for guidance and actively listen to any challenges I face, offering helpful solutions. Whether it’s about technical issues or career development, they create an open and supportive environment.”
+
+### 3. **Communication**
+   - **What to Highlight**: Assess their communication style, including transparency, frequency of updates, and how approachable they are.
+   - **Example**: “They communicate updates and expectations clearly, ensuring that the team is always on the same page. They are also open to feedback and encourage two-way communication, which fosters a sense of trust within the team.”
+
+### 4. **Encouragement of Growth**
+   - **What to Highlight**: Address how well they encourage professional development and give you opportunities to grow.
+   - **Example**: “My manager has been proactive in identifying opportunities for my growth. Whether it's providing challenging projects or recommending training programs, they invest in my professional development.”
+
+### 5. **Areas for Improvement**
+   - **What to Highlight**: Offer constructive feedback on areas where they could improve, focusing on solutions rather than criticism.
+   - **Example**: “While communication is generally strong, sometimes it would be helpful to have more regular updates on shifting priorities so that we can adjust our work more proactively.”
+
+### Example Review:
+
+---
+
+**Leadership and Direction:**  
+My manager provides excellent strategic direction, ensuring that our goals are clearly aligned with the company's broader objectives. They effectively break down complex challenges into actionable tasks, which helps keep the team focused and on track.
+
+**Support and Guidance:**  
+They have been highly supportive in both technical and personal development areas. Their willingness to listen to challenges and provide actionable guidance creates a collaborative environment. I feel confident seeking advice or discussing any issues that arise.
+
+**Communication:**  
+Their communication style is clear and transparent, ensuring the team is always informed of important updates. However, there are occasional moments where more frequent updates on shifting priorities would help us adjust our work more effectively. Overall, they are approachable and encourage open dialogue.
+
+**Encouragement of Growth:**  
+My manager has actively supported my professional development, from offering opportunities for leadership in key projects to suggesting relevant training programs. This has helped me grow as a Kubernetes platform engineer.
+
+**Areas for Improvement:**  
+One area for potential improvement is maintaining a more consistent flow of communication when priorities shift. A bit more foresight and regular updates would help the team stay aligned with new goals more seamlessly.
+
+---
+
+This provides a balanced review with praise and constructive feedback. How does this sound for your manager, or do you want to emphasize other areas?
+```
+
+
+```
 It looks like `script_a.sh` is getting stuck at `script_b.sh &`, which is intended to run in the background, but something in `script_b.sh` might still be causing the blocking behavior.
 
 Here are a few things to check and try to resolve the issue:

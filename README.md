@@ -1,3 +1,47 @@
+Here’s a draft for the review based on those points:
+
+---
+
+**1) Proactiveness:**  
+My manager consistently demonstrates proactiveness, staying ahead of potential challenges and identifying opportunities for improvement. They not only react to issues but foresee them, often bringing forward ideas to optimize our workflows.
+
+**2) Acts within the letter and spirit of policies:**  
+They have a clear understanding of the policies and guidelines we work under and ensure that we adhere to both their intent and letter. They ensure that decisions are made with integrity and fairness, which fosters trust within the team.
+
+**3) Effective engagement with other teams:**  
+My manager is highly effective in collaborating with other teams. They regularly communicate with external stakeholders to ensure alignment, contributing to seamless cross-functional collaboration. Their engagement ensures that our goals are met without roadblocks from other teams.
+
+**4) Takes accountability:**  
+They take full accountability for decisions made, both good and bad. When things don’t go as planned, my manager steps up, addresses the issue, and ensures corrective actions are taken without hesitation, setting a strong example for the team.
+
+**5) Contributes to an inclusive and diverse work environment:**  
+My manager values diversity and inclusion in every aspect of the work environment. They are committed to fostering an atmosphere where everyone’s ideas and contributions are respected, and ensure that all voices are heard.
+
+**6) Treats others with respect and acts as a role model:**  
+They consistently treat colleagues with respect, setting a high standard for the rest of the team. By acting as a role model in interactions, they inspire others to follow their lead in professionalism and empathy.
+
+**7) Empowers me to make decisions about my work, when appropriate:**  
+I feel empowered under their leadership to make decisions regarding my work. They trust my expertise, allowing me to take ownership of tasks while being available for support when needed.
+
+**8) Provides actionable feedback:**  
+Their feedback is always constructive and actionable, helping me grow professionally. They focus on specific areas of improvement while also recognizing and encouraging strengths.
+
+**9) Creates a team environment where I feel comfortable:**  
+The team environment they foster is one of comfort and collaboration. I feel comfortable expressing ideas, asking questions, and providing feedback, knowing it will be met with understanding and openness.
+
+**10) Supports in prioritizing my personal commitments and wellbeing:**  
+My manager is very supportive when it comes to personal commitments. They understand the importance of work-life balance and ensure I can prioritize my wellbeing without impacting my professional responsibilities.
+
+**11) Transparent:**  
+They are transparent in all communications and decisions. I always feel I have a clear understanding of team objectives, performance, and upcoming changes, which helps in aligning my own work with broader goals.
+
+**12) Coaches me in my career:**  
+They actively coach me in my career development, providing insights on skill-building, opportunities for growth, and long-term planning. Their guidance has been invaluable in helping me advance within the organization.
+
+---
+
+How does this feel? Should I tweak anything further?
+
 ```
 Here are two reviews—one for a colleague from your platform team and one for a colleague from the observability team. Each review focuses on collaboration, contributions, and areas for improvement.
 

@@ -1,3 +1,62 @@
+### Review for Colleague from Platform Engineering (she/her)
+
+1. **Contributes to overall team:**  
+   She consistently contributes to the platform engineering team's success by streamlining processes, identifying gaps, and suggesting innovative approaches that enhance team efficiency. Her work is a key pillar in achieving the team's goals.
+
+2. **Delivers solutions:**  
+   She is solution-oriented, consistently delivering robust, scalable, and efficient solutions. Her technical expertise and problem-solving abilities have led to several successful deployments that have significantly improved the platform.
+
+3. **Works collaboratively:**  
+   She fosters a collaborative work environment by always being open to sharing her knowledge, engaging in cross-team discussions, and helping others troubleshoot technical challenges. Her approachable nature encourages open communication.
+
+4. **Proactive risk mitigation:**  
+   She excels at identifying potential risks in projects early on and actively works to mitigate them. Her proactive approach ensures that projects run smoothly and potential setbacks are addressed before they escalate.
+
+5. **Acts not only within the letter but also the spirit of applicable policies:**  
+   She fully understands and follows both the letter and spirit of our team’s policies, ensuring that her work aligns with the platform's objectives while maintaining compliance with relevant guidelines.
+
+6. **Effective engagement:**  
+   Her engagement in team meetings and brainstorming sessions is highly effective. She listens actively, provides thoughtful input, and helps steer conversations towards productive outcomes.
+
+7. **Takes accountability:**  
+   She takes full accountability for her work, acknowledging mistakes when they occur and working diligently to correct them. Her accountability enhances the overall integrity of the team's output.
+
+8. **Contributes to an inclusive and diverse work environment:**  
+   She actively contributes to building an inclusive and diverse environment, ensuring everyone feels heard and valued. She brings diverse perspectives to the table, which enhances the team's decision-making.
+
+9. **Treats others with respect:**  
+   She consistently treats her colleagues with the utmost respect, showing empathy, and valuing the opinions of others, even during challenging situations.
+
+---
+
+### Review for Colleague from Observability Team (he/him)
+
+1. **Contributes to overall team:**  
+   He plays a vital role in the observability team by designing and maintaining critical monitoring tools that support the platform's reliability and performance. His contributions directly improve the platform’s stability.
+
+2. **Delivers solutions:**  
+   He is a go-to person for delivering effective observability solutions, especially in troubleshooting complex monitoring issues. His technical acumen is reflected in the seamless operation of observability systems across the platform.
+
+3. **Works collaboratively:**  
+   He excels in cross-team collaboration, often engaging with platform engineering and other teams to ensure observability tools are well-integrated. His openness to collaboration improves overall operational insights.
+
+4. **Proactive risk mitigation:**  
+   His ability to foresee potential performance or monitoring issues before they become critical sets him apart. He is constantly refining monitoring solutions to preemptively mitigate risks.
+
+5. **Acts not only within the letter but also the spirit of applicable policies:**  
+   He understands the importance of observability not just as a technical function but as a responsibility tied to platform reliability. His adherence to both technical policies and broader organizational goals is commendable.
+
+6. **Effective engagement:**  
+   He actively engages in team discussions and technical forums, providing valuable insights on observability practices. His contributions help the team stay ahead in adopting best practices.
+
+7. **Takes accountability:**  
+   He takes ownership of his work, ensuring that observability solutions are thoroughly tested and reliable. If issues arise, he is quick to address them, ensuring minimal impact on the platform.
+
+8. **Contributes to an inclusive and diverse work environment:**  
+   He advocates for a diverse and inclusive workplace, encouraging the sharing of diverse viewpoints within his team, which contributes to more creative and comprehensive solutions.
+
+9. **Treats others with respect:**  
+   He consistently treats his colleagues with respect, whether it’s during technical debates or day-to-day interactions. He values everyone’s input, fostering a positive and professional atmosphere.
 
 It looks like `script_a.sh` is getting stuck at `script_b.sh &`, which is intended to run in the background, but something in `script_b.sh` might still be causing the blocking behavior.
 

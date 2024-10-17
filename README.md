@@ -1,3 +1,41 @@
+```
+import time
+import pytest
+from timer import Timer  # Assuming your Timer class is in a file named timer.py
+
+def test_timer_basic_functionality(capsys):
+    with Timer() as t:
+        time.sleep(1)
+
+    # Capture the printed output
+    captured = capsys.readouterr()
+
+    # Assert that the elapsed time is approximately 1 second
+    assert pytest.approx(t.elapsed_time, rel=0.1) == 1
+    # Check if the printed message contains "Time taken"
+    assert "Time taken" in captured.out
+    assert "seconds" in captured.out
+
+def test_timer_with_exception(capsys):
+    with pytest.raises(ValueError):
+        with Timer() as t:
+            time.sleep(0.5)
+            raise ValueError("Test exception")
+    
+    # Capture the printed output
+    captured = capsys.readouterr()
+
+    # Even with an exception, ensure elapsed_time is set
+    assert hasattr(t, 'elapsed_time')
+    assert t.elapsed_time > 0
+
+    # Check if the printed message contains "Time taken"
+    assert "Time taken" in captured.out
+    assert "seconds" in captured.out
+
+```
+
+
 Here’s a full week's vegetarian diet plan with approximately 2,500 calories per day in a single table:
 
 | **Day**    | **Breakfast**                                                                                               | **Lunch**                                                                      | **Afternoon Snack**                                | **Dinner**                                                      | **Total Calories** |

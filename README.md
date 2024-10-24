@@ -1,4 +1,67 @@
 ```
+import os
+import subprocess
+import json
+import pandas as pd
+
+# Function to get the ConfigMap data using kubectl
+def get_configmap(configmap_name, namespace):
+    # Use subprocess to run the kubectl command and get the configmap in JSON format
+    result = subprocess.run(
+        ["kubectl", "get", "configmap", configmap_name, "-n", namespace, "-o", "json"],
+        stdout=subprocess.PIPE, text=True
+    )
+    # Parse the JSON output from kubectl
+    configmap_data = json.loads(result.stdout)
+    return configmap_data.get("data", {})  # Return only the 'data' field (key-value pairs)
+
+# Function to save the data to files based on their content (JSON or XML)
+def save_files_from_configmap(data):
+    for key, value in data.items():
+        # Check the content type based on the start of the value (JSON or XML)
+        if value.strip().startswith("{"):
+            filename = f"{key}.json"
+            with open(filename, "w") as file:
+                file.write(value)
+            print(f"Saved JSON file: {filename}")
+        elif value.strip().startswith("<"):
+            filename = f"{key}.xml"
+            with open(filename, "w") as file:
+                file.write(value)
+            print(f"Saved XML file: {filename}")
+        else:
+            print(f"Unknown format for {key}")
+
+# Main function to extract and save files
+def extract_configmap_files(configmap_name, namespace):
+    data = get_configmap(configmap_name, namespace)
+    
+    if not data:
+        print("No data found in the ConfigMap.")
+        return
+    
+    # Use pandas to create a DataFrame if needed for further processing or analysis
+    df = pd.DataFrame(data.items(), columns=['Filename', 'Content'])
+    
+    # Save files based on their content type
+    save_files_from_configmap(data)
+    
+    # Optionally return the DataFrame
+    return df
+
+# Set your ConfigMap name and namespace
+configmap_name = "<configmap-name>"
+namespace = "<namespace>"
+
+# Extract and save files from ConfigMap
+df = extract_configmap_files(configmap_name, namespace)
+
+# Display the DataFrame (optional)
+print(df)
+
+```
+
+```
 import time
 import pytest
 from timer import Timer  # Assuming your Timer class is in a file named timer.py

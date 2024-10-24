@@ -1,4 +1,9 @@
 ```
+kubectl get configmaps -n default -o json | jq '.items[] | {Name: .metadata.name, Data: (.data | with_entries(select(.key | test("Some-pattern.*\\.json"))))}'
+
+```
+
+```
 import os
 import subprocess
 import json

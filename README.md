@@ -1,4 +1,8 @@
 ```
+curl 'http://xxx.com:9099/api/v1/query?query=up'
+```
+
+```
 kubectl get configmaps -n default -o json | jq '.items[] | {Name: .metadata.name, Data: (.data | with_entries(select((.key | endswith(".json")) and (.value != null and .value != ""))))}'
 
 

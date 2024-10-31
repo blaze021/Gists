@@ -1,4 +1,60 @@
 ```
+[
+    {
+        "endpoint": "/api/v1/data1",
+        "type": "json",
+        "command-run": "curl -X GET http://localhost/api/v1/data1"
+    },
+    {
+        "endpoint": "/api/v1/data2",
+        "type": "df",
+        "command-run": "curl -X GET http://localhost/api/v1/data2"
+    },
+    {
+        "endpoint": "/api/v1/data3",
+        "type": "json",
+        "command-run": "curl -X GET http://localhost/api/v1/data3"
+    },
+    {
+        "endpoint": "/api/v1/data4",
+        "type": "df",
+        "command-run": "curl -X GET http://localhost/api/v1/data4"
+    },
+    {
+        "endpoint": "/api/v1/data5",
+        "type": "json",
+        "command-run": "curl -X GET http://localhost/api/v1/data5"
+    },
+    {
+        "endpoint": "/api/v1/data6",
+        "type": "df",
+        "command-run": "curl -X GET http://localhost/api/v1/data6"
+    },
+    {
+        "endpoint": "/api/v1/data7",
+        "type": "json",
+        "command-run": "curl -X GET http://localhost/api/v1/data7"
+    },
+    {
+        "endpoint": "/api/v1/data8",
+        "type": "df",
+        "command-run": "curl -X GET http://localhost/api/v1/data8"
+    },
+    {
+        "endpoint": "/api/v1/data9",
+        "type": "json",
+        "command-run": "curl -X GET http://localhost/api/v1/data9"
+    },
+    {
+        "endpoint": "/api/v1/data10",
+        "type": "df",
+        "command-run": "curl -X GET http://localhost/api/v1/data10"
+    }
+]
+
+```
+
+```
 curl 'http://xxx.com:9099/api/v1/query?query=up'
 ```
 

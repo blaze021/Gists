@@ -1,4 +1,17 @@
 ```
+awk 'NR==1 { 
+        for (i=1; i<=NF; i++) header[i]=$i; 
+        next 
+     } 
+     { 
+        printf("{"); 
+        for (i=1; i<=NF; i++) printf("\"" header[i] "\": \"" $i "\", "); 
+        printf("}\n"); 
+     }' data.txt | sed 's/, }/}/' | jq -s .
+
+```
+
+```
 [
     {
         "endpoint": "/api/v1/data1",

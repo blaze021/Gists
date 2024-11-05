@@ -1,4 +1,28 @@
 ```
+#!/bin/bash
+
+# Get the list of service names
+services=$(kubectl get svc -o yaml | grep hostname: | awk '{ print $2 }')
+
+# Output the header
+echo -e "Service Name\tSDKs\n"
+
+# Loop through each service
+for service in $services; do
+    # Attempt to fetch release.txt from the service
+    sdk_versions=$(curl -s "https://${service}/release.txt" | grep -i "sdk")
+
+    # Display the service name and SDKs (if found)
+    if [[ -n "$sdk_versions" ]]; then
+        echo -e "$service\t$sdk_versions"
+    else
+        echo -e "$service\t"
+    fi
+done
+
+```
+
+```
 awk 'NR==1 { 
         for (i=1; i<=NF; i++) header[i]=$i; 
         next 

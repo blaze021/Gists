@@ -1,4 +1,9 @@
 ```
+kubectl get svc -o yaml | grep hostname: | awk '{ print $2 }' | xargs -I{} sh -c 'content=$(curl -s "https://{}/release.txt" || echo ""); if [[ -n "$content" ]]; then echo -e "{}\t$(echo "$content" | grep -i "sdk")"; fi'
+
+```
+
+```
 #!/bin/bash
 
 # Get the list of service names

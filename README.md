@@ -1,4 +1,17 @@
 ```
+kubectl get deployments --all-namespaces -o json | jq -r '
+  .items[] | 
+  select(.metadata.annotations."your-annotation-key" | not) | 
+  .metadata.name + " in namespace " + .metadata.namespace'
+```
+
+```
+kubectl get deployments --all-namespaces -o json | \
+  grep -L '"your-annotation-key"' | \
+  jq -r '.items[].metadata.name + " in namespace " + .items[].metadata.namespace'
+```
+
+```
 kubectl get svc -o yaml | grep hostname: | awk '{ print $2 }' | xargs -I{} sh -c 'content=$(curl -s "https://{}/release.txt" || echo ""); if [[ -n "$content" ]]; then echo -e "{}\t$(echo "$content" | grep -i "sdk")"; fi'
 
 ```

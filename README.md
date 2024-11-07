@@ -1,4 +1,21 @@
 ```
+#!/bin/bash
+
+# Define the allowed cluster names
+cluster_name=('cluster-name-1' 'cluster-2')
+
+# Check if the cluster name passed as the first argument is in the list
+if [[ ! " ${cluster_name[@]} " =~ " $1 " ]]; then
+    echo "WRONG CLUSTER"
+    exit 1
+fi
+
+echo "Cluster name $1 is valid."
+# Continue with the rest of the script here if needed
+
+```
+
+```
 kubectl get deployments --all-namespaces -o json | jq -r '
   .items[] | 
   select(.metadata.annotations."your-annotation-key" | not) | 

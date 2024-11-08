@@ -71,58 +71,49 @@ awk 'NR==1 {
 ```
 
 ```
-[
-    {
-        "endpoint": "/api/v1/data1",
+{
+    "/api/v1/data1": {
         "type": "json",
-        "command-run": "curl -X GET http://localhost/api/v1/data1"
+        "command": "curl -X GET http://localhost/api/v1/data1"
     },
-    {
-        "endpoint": "/api/v1/data2",
+    "/api/v1/data2": {
         "type": "df",
-        "command-run": "curl -X GET http://localhost/api/v1/data2"
+        "command": "curl -X GET http://localhost/api/v1/data2"
     },
-    {
-        "endpoint": "/api/v1/data3",
+    "/api/v1/data3": {
         "type": "json",
-        "command-run": "curl -X GET http://localhost/api/v1/data3"
+        "command": "curl -X GET http://localhost/api/v1/data3"
     },
-    {
-        "endpoint": "/api/v1/data4",
+    "/api/v1/data4": {
         "type": "df",
-        "command-run": "curl -X GET http://localhost/api/v1/data4"
+        "command": "curl -X GET http://localhost/api/v1/data4"
     },
-    {
-        "endpoint": "/api/v1/data5",
+    "/api/v1/data5": {
         "type": "json",
-        "command-run": "curl -X GET http://localhost/api/v1/data5"
+        "command": "curl -X GET http://localhost/api/v1/data5"
     },
-    {
-        "endpoint": "/api/v1/data6",
+    "/api/v1/data6": {
         "type": "df",
-        "command-run": "curl -X GET http://localhost/api/v1/data6"
+        "command": "curl -X GET http://localhost/api/v1/data6"
     },
-    {
-        "endpoint": "/api/v1/data7",
+    "/api/v1/data7": {
         "type": "json",
-        "command-run": "curl -X GET http://localhost/api/v1/data7"
+        "command": "curl -X GET http://localhost/api/v1/data7"
     },
-    {
-        "endpoint": "/api/v1/data8",
+    "/api/v1/data8": {
         "type": "df",
-        "command-run": "curl -X GET http://localhost/api/v1/data8"
+        "command": "curl -X GET http://localhost/api/v1/data8"
     },
-    {
-        "endpoint": "/api/v1/data9",
+    "/api/v1/data9": {
         "type": "json",
-        "command-run": "curl -X GET http://localhost/api/v1/data9"
+        "command": "curl -X GET http://localhost/api/v1/data9"
     },
-    {
-        "endpoint": "/api/v1/data10",
+    "/api/v1/data10": {
         "type": "df",
-        "command-run": "curl -X GET http://localhost/api/v1/data10"
+        "command": "curl -X GET http://localhost/api/v1/data10"
     }
-]
+}
+
 
 ```
 

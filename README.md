@@ -1,4 +1,15 @@
 ```
+"""kubectl get pods | awk 'NR==1 { 
+        for (i=1; i<=NF; i++) header[i]=$i; 
+        next 
+     } 
+     { 
+        printf("{"); 
+        for (i=1; i<=NF; i++) printf("\\"" header[i] "\\": \\"" $i "\\", "); 
+        printf("}\\n"); 
+     }' | sed 's/, }/}/' | jq -s ."""
+```
+```
 #!/bin/bash
 
 # Define the allowed cluster names

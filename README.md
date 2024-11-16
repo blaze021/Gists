@@ -1,4 +1,11 @@
 ```
+sum(kube_pod_container_resource_requests{resource="cpu"}) by (namespace, pod)
+* on (namespace, pod) group_left(owner_name) kube_pod_owner{owner_kind="Deployment"} 
+* 1000
+
+```
+
+```
 """kubectl get pods | awk 'NR==1 { 
         for (i=1; i<=NF; i++) header[i]=$i; 
         next 

@@ -1,4 +1,22 @@
 ```
+kubectl get pods --no-headers | awk '
+function parse_age(age) {
+    if (age ~ /d$/) {
+        return substr(age, 1, length(age) - 1) * 1440;
+    } else if (age ~ /h$/) {
+        return substr(age, 1, length(age) - 1) * 60;
+    } else if (age ~ /m$/) {
+        return substr(age, 1, length(age) - 1);
+    } else {
+        return 0; # Default case for unknown formats
+    }
+}
+{
+    if (parse_age($NF) > 60) print $0;
+}'
+
+```
+```
 sum(kube_pod_container_resource_requests{resource="cpu"}) by (namespace, pod)
 * on (namespace, pod) group_left(owner_name) kube_pod_owner{owner_kind="Deployment"} 
 * 1000

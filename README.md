@@ -1,4 +1,7 @@
 ```
+kubectl get pods --no-headers | awk '{age=$NF; if ((age ~ /m$/ && age+0 < 60) || (age ~ /h$/ && substr(age, 1, length(age)-1) * 60 < 60) || (age ~ /d$/ && substr(age, 1, length(age)-1) * 1440 < 60)) print $0}'
+```
+```
 kubectl get pods --no-headers | awk '
 function parse_age(age) {
     if (age ~ /d$/) {

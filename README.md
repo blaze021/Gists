@@ -1,4 +1,9 @@
 ```
+echo "abc 123!@#$%^&*()_+[]{}:/-" | sed -e 's/ /%20/g' -e 's/!/%21/g' -e 's/@/%40/g' -e 's/#/%23/g' -e 's/\$/%24/g' -e 's/&/%26/g' -e 's/(/%28/g' -e 's/)/%29/g' -e 's/*/%2A/g' -e 's/+/%2B/g' -e 's/,/%2C/g' -e 's/:/%3A/g' -e 's/;/%3B/g' -e 's/=/%3D/g' -e 's/?/%3F/g' -e 's/\[/%5B/g' -e 's/\]/%5D/g' -e 's/\//%2F/g' -e 's/-/%2D/g'
+
+```
+
+```
 kubectl get pods --no-headers | awk '{age=$NF; if ((age ~ /m$/ && age+0 < 60) || (age ~ /h$/ && substr(age, 1, length(age)-1) * 60 < 60) || (age ~ /d$/ && substr(age, 1, length(age)-1) * 1440 < 60)) print $0}'
 ```
 ```

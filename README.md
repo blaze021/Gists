@@ -1,3 +1,68 @@
+To fetch a JSON file from an S3 store over HTTPS, load it into memory, and make it globally accessible across files in a FastAPI application, you can follow these steps:
+
+### Step 1: Create a Config Loader
+Create a utility to fetch the JSON from S3 and load it into memory. This can be placed in a file, such as `config_loader.py`.
+
+```python
+import requests
+import json
+
+# Global variable to hold the JSON data
+config_data = None
+
+def fetch_config(url: str):
+    """Fetch JSON configuration from the given URL."""
+    global config_data
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an exception for HTTP errors
+    config_data = response.json()
+```
+
+### Step 2: Initialize Config on App Startup
+Use FastAPI's startup event to load the configuration at the start of the application. You can create the main application in `main.py`.
+
+```python
+from fastapi import FastAPI
+from config_loader import fetch_config, config_data
+
+app = FastAPI()
+
+CONFIG_URL = "https://your-s3-store-url/config.json"
+
+@app.on_event("startup")
+async def load_config():
+    """Load configuration on application startup."""
+    fetch_config(CONFIG_URL)
+
+@app.get("/config")
+async def get_config():
+    """Endpoint to return the loaded configuration."""
+    return config_data
+```
+
+### Step 3: Access Config Data in Other Modules
+In other parts of your application, you can directly import and use `config_data` from `config_loader.py`.
+
+For example, in another module:
+
+```python
+from config_loader import config_data
+
+def use_config():
+    """Access global config data."""
+    if config_data:
+        print("Config Loaded:", config_data)
+    else:
+        print("Config not loaded yet!")
+```
+
+### Key Considerations
+1. **Thread Safety**: If the config might change at runtime and you are running in a multi-threaded environment, consider using thread-safe techniques (e.g., locks) to ensure consistency.
+2. **Error Handling**: Implement retries and error handling for the S3 fetch operation in case the network or S3 service is unavailable.
+3. **Security**: Ensure the S3 URL and any credentials (if required) are securely stored, e.g., using environment variables.
+
+Let me know if you need further assistance!
+
 ```
 echo "abc 123!@#$%^&*()_+[]{}:/-" | sed -e 's/ /%20/g' -e 's/!/%21/g' -e 's/@/%40/g' -e 's/#/%23/g' -e 's/\$/%24/g' -e 's/&/%26/g' -e 's/(/%28/g' -e 's/)/%29/g' -e 's/*/%2A/g' -e 's/+/%2B/g' -e 's/,/%2C/g' -e 's/:/%3A/g' -e 's/;/%3B/g' -e 's/=/%3D/g' -e 's/?/%3F/g' -e 's/\[/%5B/g' -e 's/\]/%5D/g' -e 's/\//%2F/g' -e 's/-/%2D/g'
 

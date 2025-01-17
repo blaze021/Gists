@@ -1,4 +1,8 @@
 ```
+kubectl patch deployment <deployment-name> -p '{"spec":{"template":{"spec":{"containers":[{"name":"<container-name>","resources":{"requests":{"cpu":"<new-cpu-request>"},"limits":{"cpu":"<new-cpu-limit>"}}}]}}}}'
+```
+
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -1,4 +1,9 @@
 ```
+kubectl get deploy -A -o json | jq '[.items[] | {namespace: .metadata.namespace, deploy_name: .metadata.name, config_mode: (.spec.template.spec.containers[0].env[]? | select(.name=="CONFIG_MODE").value // null)}]'
+
+```
+
+```
 kubectl get deploy -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{range .spec.template.spec.containers[*].env[?(@.name=="CONFIG_MODE")]}{.value}{"\n"}{end}{end}'
 ```
 

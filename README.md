@@ -1,3 +1,7 @@
+```
+kubectl get deploy -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{range .spec.template.spec.containers[*].env[?(@.name=="CONFIG_MODE")]}{.value}{"\n"}{end}{end}'
+```
+
 # **API Documentation for Kubernetes API Server Integration**
 
 Welcome to the documentation for the Kubernetes API built using FastAPI. This API facilitates interaction with Kubernetes clusters by leveraging tools like `kubectl`, `helm`, and `fluxcd`. This document provides an overview of the API endpoints and how to use them effectively.

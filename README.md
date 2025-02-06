@@ -1,4 +1,8 @@
 ```
+https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/02.8.html
+```
+
+```
 kubectl get deploy -A -o json | jq '[.items[] | {namespace: .metadata.namespace, deploy_name: .metadata.name, config_mode: (.spec.template.spec.containers[0].env[]? | select(.name=="CONFIG_MODE").value // null)}]'
 
 ```

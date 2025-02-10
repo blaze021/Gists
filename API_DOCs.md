@@ -1,4 +1,27 @@
 ```
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: cluster-down-scaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: my-deployment  # Replace with your deployment name
+  minReplicaCount: 0  # No pods when the cluster is up
+  maxReplicaCount: 5  # Scale up when the cluster is down
+  cooldownPeriod: 30  # Wait time before scaling down
+  pollingInterval: 15  # Check every 15 seconds
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus.default.svc:9090
+        metricName: cluster_down
+        query: "sum(up{cluster='connected-cluster'}) == 0"
+        threshold: "1"  # Scale when the cluster is down
+
+```
+
+```
 kubectl patch deployment <deployment-name> -p '{"spec":{"template":{"spec":{"containers":[{"name":"<container-name>","resources":{"requests":{"cpu":"<new-cpu-request>"},"limits":{"cpu":"<new-cpu-limit>"}}}]}}}}'
 ```
 

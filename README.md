@@ -1,4 +1,14 @@
 ```
+kubectl get pods -A -o json | jq '[.items[] | { 
+  namespace: .metadata.namespace, 
+  pod: .metadata.name, 
+  deployment: (.metadata.name | capture("^(?<deployment>.+?)-[^-]+-[^-]+$") | .deployment), 
+  containers: [.spec.containers[] | {name: .name, resources: .resources}]
+}]'
+
+```
+
+```
 https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/02.8.html
 ```
 

@@ -1,4 +1,20 @@
 ```
+kubectl get pods -A -o json | jq '[.items[] | 
+  {
+    namespace: .metadata.namespace, 
+    pod: .metadata.name, 
+    deployment: (.metadata.name | split("-")[:-1] | join("-")),
+    main_container: (.spec.containers[0].name // null),
+    resource_limit_cpu: (.spec.containers[0].resources.limits.cpu // null),
+    resource_limit_memory: (.spec.containers[0].resources.limits.memory // null),
+    resource_requests_cpu: (.spec.containers[0].resources.requests.cpu // null),
+    resource_requests_memory: (.spec.containers[0].resources.requests.memory // null)
+  }
+]'
+
+```
+
+```
 kubectl get pods -A -o json | jq '[.items[] | { 
   namespace: .metadata.namespace, 
   pod: .metadata.name, 

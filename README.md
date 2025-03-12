@@ -2,9 +2,10 @@
 kubectl get pods -A -o json | jq '[.items[] | { 
   namespace: .metadata.namespace, 
   pod: .metadata.name, 
-  deployment: (.metadata.name | capture("^(?<deployment>.+?)-[^-]+-[^-]+$") | .deployment), 
+  deployment: (.metadata.name | match("^(?<deployment>.+-[^-]+)-[^-]+$") | .captures[0].string), 
   containers: [.spec.containers[] | {name: .name, resources: .resources}]
 }]'
+
 
 ```
 

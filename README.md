@@ -1,4 +1,8 @@
 ```
+(.[1] | if test("^[0-9]+$") then . else (.[1] + (if (.[2] | test("^[0-9]+$")) then "-" + .[2] else "" end)) end)
+```
+
+```
 kubectl get pods -A -o json | jq '[.items[] | 
   {
     pod: .metadata.name, 

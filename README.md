@@ -1,4 +1,8 @@
 ```
+jq -R 'split(" ") | { (.[0]): { cluster_env: .[1] } }' < input.txt | jq -s add
+```
+
+```
 kubectl get pods -A -o json | jq '[.items[] | 
   {
     namespace: .metadata.namespace, 

@@ -1,4 +1,19 @@
 ```
+kubectl get pods -A -o json | jq '[.items[] | 
+  {
+    pod: .metadata.name, 
+    environment: (
+      .metadata.name 
+      | split("-") 
+      | map(select(test("^(qa|prod|r[0-9]+)$"))) 
+      | join("-")
+    )
+  }
+]'
+
+```
+
+```
 jq -R 'split(" ") | { (.[0]): { cluster_env: .[1] } }' < input.txt | jq -s add
 ```
 

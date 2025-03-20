@@ -1,4 +1,8 @@
 ```
+kubectl get deploy -A -o json | jq '[.items[] | {namespace: .metadata.namespace, name: .metadata.name, replicas: .status.replicas, updated: .status.updatedReplicas, available: .status.availableReplicas}]'
+```
+
+```
 kubectl get pods -A -o json | jq '[.items[] | 
   {
     pod: .metadata.name, 

@@ -1,4 +1,8 @@
 ```
+kubectl get pods -A -o json | jq -r '.items[] | {namespace: .metadata.namespace, name: .metadata.name, cpu: (.spec.containers[].resources.requests.cpu // "0")} | select(.cpu != "null") |  "\(.namespace) \(.name) \(.cpu)"' |   sed 's/m//g' | sort -k3 -nr | head -n 1
+```
+
+```
 kubectl get deploy -A -o json | jq '[.items[] | {namespace: .metadata.namespace, name: .metadata.name, replicas: .status.replicas, updated: .status.updatedReplicas, available: .status.availableReplicas}]'
 ```
 

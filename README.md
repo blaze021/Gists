@@ -1,4 +1,9 @@
 ```
+kubectl get pods -A -o json | jq -r ' .items[] | .metadata.namespace as $ns | .metadata.name as $pod | [(.spec.containers[].resources.requests.cpu // "0")] as $cpu | $cpu | map(sub("m$"; "") | tonumber) | add as $totalCpu |  select($totalCpu > 3000) | "\($ns) \($pod) totalCpu)m"'
+
+```
+
+```
 kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name} {.spec.containers[*].resources.requests.cpu}{"\n"}{end}'
 
 ```

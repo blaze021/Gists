@@ -1,4 +1,13 @@
 ```
+for entry in $(kubectl get pods -A --no-headers -o custom-columns="NAMESPACE:.metadata.namespace,NAME:.metadata.name"); do
+  ns=$(echo "$entry" | cut -d' ' -f1)
+  pod=$(echo "$entry" | cut -d' ' -f2)
+  echo "Namespace: $ns, Pod: $pod"
+done
+
+```
+
+```
 kubectl get pods -A -o json | jq -r ' .items[] | .metadata.namespace as $ns | .metadata.name as $pod | [(.spec.containers[].resources.requests.cpu // "0")] as $cpu | $cpu | map(sub("m$"; "") | tonumber) | add as $totalCpu |  select($totalCpu > 3000) | "\($ns) \($pod) totalCpu)m"'
 
 ```

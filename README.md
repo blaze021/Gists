@@ -1,4 +1,68 @@
 ```
+
+#!/bin/bash
+
+set -e
+
+# Function to display kustomizations
+list_kustomizations() {
+    echo "Fetching kustomizations in namespace: $NAMESPACE"
+    flux get ks -n "$NAMESPACE"
+}
+
+# Function to suspend kustomizations
+suspend_kustomizations() {
+    for ks in "${SELECTED_KS[@]}"; do
+        echo "Suspending $ks in namespace $NAMESPACE"
+        flux suspend ks "$ks" -n "$NAMESPACE"
+    done
+}
+
+# Function to update ConfigMap
+update_configmap() {
+    echo "Updating ConfigMap: $CONFIGMAP_NAME in namespace: $NAMESPACE"
+    kubectl patch configmap "$CONFIGMAP_NAME" -n "$NAMESPACE" --type merge -p "$PATCH_DATA"
+}
+
+# Function to reconcile HelmRelease
+reconcile_hr() {
+    echo "Reconciling HelmRelease: $HR_NAME in namespace: $NAMESPACE"
+    flux reconcile hr "$HR_NAME" -n "$NAMESPACE"
+}
+
+# User Input
+read -p "Enter the namespace: " NAMESPACE
+list_kustomizations
+read -p "Enter the kustomizations to suspend (e.g., 1 2 3 or all): " SELECTION
+
+# Fetch Kustomization names
+MAPFILE -t KS_ARRAY < <(flux get ks -n "$NAMESPACE" | awk 'NR>1 {print $1}')
+if [[ "$SELECTION" == "all" ]]; then
+    SELECTED_KS=("${KS_ARRAY[@]}")
+else
+    IFS=' ' read -r -a INDEXES <<< "$SELECTION"
+    for index in "${INDEXES[@]}"; do
+        SELECTED_KS+=("${KS_ARRAY[$((index-1))]}")
+    done
+fi
+
+suspend_kustomizations
+
+# ConfigMap Update
+read -p "Enter ConfigMap name to update: " CONFIGMAP_NAME
+read -p "Enter JSON patch data for ConfigMap: " PATCH_DATA
+update_configmap
+
+# Reconcile HelmRelease
+read -p "Enter HelmRelease name to reconcile: " HR_NAME
+reconcile_hr
+
+echo "Script execution completed successfully."
+
+
+```
+
+```
 for entry in $(kubectl get pods -A --no-headers -o custom-columns="NAMESPACE:.metadata.namespace,NAME:.metadata.name"); do
   ns=$(echo "$entry" | cut -d' ' -f1)
   pod=$(echo "$entry" | cut -d' ' -f2)

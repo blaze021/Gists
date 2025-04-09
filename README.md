@@ -1,4 +1,10 @@
 ```
+I just wanted to kindly remind you that the offer letter is a confidential document. I would really appreciate it if it could be handled with the appropriate level of care and discretion.
+
+Thank you very much for your understanding and support.
+```
+
+```
 I hope you're doing well.
 
 I am writing to formally resign from my position as Associate at Morgan Stanley, with my last working day being June 6, 2025. I’ve recently been offered a new opportunity that aligns well with my long-term professional goals, and after thoughtful consideration, I have decided to move forward with this next step in my career.

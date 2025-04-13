@@ -1,35 +1,6 @@
 ```
-I just wanted to kindly remind you that the offer letter is a confidential document. I would really appreciate it if it could be handled with the appropriate level of care and discretion.
-
-Thank you very much for your understanding and support.
+kubectl get events --all-namespaces --field-selector type=Warning --sort-by='.lastTimestamp'
 ```
-
-```
-I hope you're doing well.
-
-I am writing to formally resign from my position as Associate at Morgan Stanley, with my last working day being June 6, 2025. I’ve recently been offered a new opportunity that aligns well with my long-term professional goals, and after thoughtful consideration, I have decided to move forward with this next step in my career.
-
-This was not an easy decision, as working at Morgan Stanley has been a truly valuable and enriching experience. I’m incredibly grateful for the support, learning, and guidance I’ve received from both you and the broader team over the course of my time here.
-
-Over the next 60 days, I’m committed to ensuring a smooth and seamless transition. Please let me know how I can best support the team in that process—whether it’s wrapping up ongoing work, documenting key processes, or assisting in onboarding someone new.
-
-Thank you once again for everything. I look forward to staying in touch and wish Morgan Stanley continued success.
-
-Warm regards,
-```
-
-```
-I hope this message finds you well.
-
-I am writing to formally resign from my position as Associate at Morgan Stanley, effective from today to my last working day as June 6, 2025. This decision has not been easy, as my time here has been immensely valuable and rewarding. However, I have been offered an opportunity that aligns closely with my long-term career goals, and after careful consideration, I have decided to pursue this new path.
-
-I want to express my sincere gratitude for the support, mentorship, and opportunities I’ve received during my time at Morgan Stanley. Working with such a talented and driven team has significantly contributed to my professional growth, and I will carry those experiences with me into this next chapter.
-
-Please let me know how I can ensure a smooth and seamless transition during my notice period. I am happy to assist in handing over responsibilities or training my replacement.
-
-Thank you once again for the incredible experience. I hope to stay in touch and wish the team continued success in all future endeavors.
-```
-
 
 ```
 

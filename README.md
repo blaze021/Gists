@@ -1,4 +1,36 @@
 ```
+import pandas as pd
+
+# Sample data
+df = pd.DataFrame({
+    'env': ['dev', 'qa', 'qa-1', 'qa-pe', 'qa-1-pe', 'prod']
+})
+
+# Mapping rules
+replacements = {
+    'qa-1-pe': 'qa-1',
+    'qa-pe': 'qa',
+    'qa-1': 'qa-1',
+    'qa': 'qa',
+    'dev': 'dev',
+    'prod': 'prod'
+}
+
+# Function to apply replacements based on containment
+def simplify_env(value):
+    for key, replacement in replacements.items():
+        if key in value:
+            return replacement
+    return value  # default if no match
+
+# Apply function to create new column
+df['env_simplified'] = df['env'].apply(simplify_env)
+
+print(df)
+
+```
+
+```
 kubectl get events --all-namespaces --field-selector type=Warning --sort-by='.lastTimestamp'
 ```
 

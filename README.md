@@ -1,4 +1,17 @@
 ```
+df['ver_date'] = pd.to_datetime(df['ver_date'], format='%Y.%m.%d')
+df['last_cluster_upg'] = pd.to_datetime(df['last_cluster_upg'], format='%Y.%m.%d')
+
+# Use today's date
+today = pd.to_datetime(datetime.today().date())
+
+# Find the latest (closest to today but not after today)
+df['latest_date'] = df[['ver_date', 'last_cluster_upg']].apply(
+    lambda row: max([d for d in row if d <= today], default=pd.NaT), axis=1
+)
+```
+
+```
 import pandas as pd
 
 # Sample data

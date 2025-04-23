@@ -1,4 +1,20 @@
 ```
+output_file = "all_files_list.txt"
+
+with open(output_file, 'w') as f:
+    for dir_path in df['directory']:
+        f.write(f"Directory: {dir_path}\n")
+        try:
+            # Run find command to list all files
+            result = subprocess.run(['find', dir_path, '-type', 'f'], capture_output=True, text=True, check=True)
+            files = result.stdout.strip()
+            f.write(files + "\n\n")
+        except subprocess.CalledProcessError as e:
+            f.write(f"Error accessing {dir_path}: {e}\n\n")
+
+```
+
+```
 # Set your region
 region_name = "us-west"
 

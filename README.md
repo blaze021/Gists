@@ -1,4 +1,21 @@
 ```
+# Set your region
+region_name = "us-west"
+
+# Define base path
+base_path = f"/v/region/{region_name}"
+
+# Function to check directory
+def check_directory(row):
+    path = os.path.join(base_path, row["super_project_name"], row["sub_name"])
+    return path if os.path.isdir(path) else "Not exists"
+
+# Apply function
+df["Directory"] = df.apply(check_directory, axis=1)
+```
+
+
+```
 df['ver_date'] = pd.to_datetime(df['ver_date'], format='%Y.%m.%d')
 df['last_cluster_upg'] = pd.to_datetime(df['last_cluster_upg'], format='%Y.%m.%d')
 

@@ -1,4 +1,13 @@
 ```
+Dear [HR's Name/HR Team],
+As per the conversations I had with my managers, I had formally submitted my resignation on April 7th, 2025. In line with the notice period policy, I will be serving a two-month notice, making my last working day [Insert Last Working Day, e.g., June 7th, 2025].
+
+I am forwarding this communication to you to ensure that all necessary formalities and documentation from the HR side can be initiated accordingly. Please let me know if there are any additional steps I need to follow during this transition.
+
+Warm regards,
+```
+
+```
 output_file = "all_files_list.txt"
 
 with open(output_file, 'w') as f:

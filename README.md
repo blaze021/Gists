@@ -1,4 +1,9 @@
 ```
+jq -c '.[]' clusters.json | while read -r obj; do ctx=$(echo $obj | jq -r '.cluster'); kubectl config use-context "$ctx" >/dev/null; ns=$(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | jq -R 'split(" ")'); echo "$obj" | jq --argjson ns "$ns" '. + {ns: $ns}'; done | jq -s .
+
+```
+
+```
 #!/bin/bash
 
 # List all resource types separately

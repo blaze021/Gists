@@ -1,4 +1,18 @@
 ```
+#!/bin/bash
+
+# List all resource types separately
+resources=$(kubectl api-resources --namespaced=true --verbs=list -o name)
+
+# Loop through each resource type
+for resource in $resources; do
+    echo "Getting $resource..."
+    kubectl get "$resource" -A > "${resource//\//_}.txt"
+done
+
+```
+
+```
 output_file = "all_files_list.txt"
 
 with open(output_file, 'w') as f:

@@ -1,4 +1,7 @@
 ```
+jq -r '.[].cluster' clusters.json | while IFS= read -r ctx; do kubectl config use-context "$ctx" >/dev/null 2>&1; ns=$(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | jq -R 'split(" ")'); echo "{\"cluster\":\"$ctx\"}" | jq --argjson ns "$ns" '. + {ns: $ns}'; done | jq -s .
+
+
 jq -c '.[]' clusters.json | while read -r obj; do ctx=$(echo $obj | jq -r '.cluster'); kubectl config use-context "$ctx" >/dev/null; ns=$(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | jq -R 'split(" ")'); echo "$obj" | jq --argjson ns "$ns" '. + {ns: $ns}'; done | jq -s .
 
 ```

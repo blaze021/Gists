@@ -1,4 +1,10 @@
 ```
+kubectl get pods -A -o json | jq -r '.items[] | {namespace: .metadata.namespace, name: .metadata.name, ready: "\(.status.containerStatuses | map(select(.ready == true)) | length)/\(.status.containerStatuses | length)"}'
+
+```
+
+
+```
 jq -r '.[].cluster' clusters.json | while IFS= read -r ctx; do kubectl config use-context "$ctx" >/dev/null 2>&1; ns=$(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | jq -R 'split(" ")'); echo "{\"cluster\":\"$ctx\"}" | jq --argjson ns "$ns" '. + {ns: $ns}'; done | jq -s .
 
 

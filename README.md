@@ -1,4 +1,115 @@
 ```
+from textual.app import App, ComposeResult
+from textual.widgets import Static, Button, Header, Footer
+from textual.containers import Vertical
+from textual.reactive import reactive
+
+questions = [
+    {
+        "question": "What does 'kubectl' stand for?",
+        "options": [
+            "A. Kubernetes Control",
+            "B. Kube Configuration Tool",
+            "C. Kubernetes Command Line Tool",
+            "D. Kube Container Terminal Log"
+        ],
+        "answer": "C"
+    },
+    {
+        "question": "Which component runs on every node and maintains pods?",
+        "options": [
+            "A. kube-apiserver",
+            "B. kube-scheduler",
+            "C. etcd",
+            "D. kubelet"
+        ],
+        "answer": "D"
+    },
+    {
+        "question": "What is the default namespace in Kubernetes?",
+        "options": [
+            "A. root",
+            "B. default",
+            "C. base",
+            "D. kube-system"
+        ],
+        "answer": "B"
+    },
+    {
+        "question": "Which object is used to expose services to external traffic?",
+        "options": [
+            "A. Pod",
+            "B. Ingress",
+            "C. ConfigMap",
+            "D. ReplicaSet"
+        ],
+        "answer": "B"
+    }
+]
+
+class KBCQuizApp(App):
+    CSS_PATH = ""
+    current_question_index = reactive(0)
+    score = reactive(0)
+
+    def compose(self) -> ComposeResult:
+        yield Header(show_clock=True)
+        yield Static(self.get_ascii_art(), id="title")
+        yield Static("Press any option to start...", id="message")
+        yield Vertical(*[Button(f"{opt}", id=f"opt{i}") for i, opt in enumerate(questions[0]['options'])], id="options")
+        yield Footer()
+
+    def get_ascii_art(self) -> str:
+        return (
+            """
+  _  __     _                              _          
+ | |/ /__ _| |__  ___ _ __ ___   ___  _ __| |_ ___ _ __ 
+ | ' // _` | '_ \/ __| '_ ` _ \ / _ \| '__| __/ _ \ '__|
+ | . \ (_| | | | \__ \ | | | | | (_) | |  | ||  __/ |   
+ |_|\_\__,_|_| |_|___/_| |_| |_|\___/|_|   \__\___|_|   
+
+    Welcome to Kubernetes Quiz - KBC Style!
+            """
+        )
+
+    def on_mount(self) -> None:
+        self.update_question()
+
+    def update_question(self):
+        if self.current_question_index < len(questions):
+            q = questions[self.current_question_index]
+            self.query_one("#message", Static).update(f"Question {self.current_question_index + 1}: {q['question']}")
+            for i, opt in enumerate(q['options']):
+                self.query_one(f"#opt{i}", Button).label = opt
+        else:
+            self.query_one("#message", Static).update("Congratulations! You've completed the quiz.")
+            for i in range(4):
+                self.query_one(f"#opt{i}", Button).remove()
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if self.current_question_index >= len(questions):
+            return
+
+        button = event.button
+        answer = button.label.strip().split(".")[0]
+        correct_answer = questions[self.current_question_index]['answer']
+
+        if answer == correct_answer:
+            self.current_question_index += 1
+            self.score += 1
+            self.update_question()
+        else:
+            self.query_one("#message", Static).update(f"Wrong Answer. Correct was {correct_answer}. Game Over!")
+            for i in range(4):
+                self.query_one(f"#opt{i}", Button).disabled = True
+
+if __name__ == "__main__":
+    app = KBCQuizApp()
+    app.run()
+```
+
+
+```
 kubectl get pods -A -o json | jq -r '.items[] | {namespace: .metadata.namespace, name: .metadata.name, ready: "\(.status.containerStatuses | map(select(.ready == true)) | length)/\(.status.containerStatuses | length)"}'
 
 ```

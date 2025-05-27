@@ -1,10 +1,3 @@
-```
-I would like to initiate my exit process and request your assistance with the necessary formalities. Please note that the sign-off processes from both the Business Unit (BU) Admin and Cost Center owner have been initiated, though they are not yet complete.
-
-Kindly let me know the next steps from my side and if there’s anything further required to proceed.
-
-Thank you for your support and guidance.
-```
 
 ```
 from textual.app import App, ComposeResult

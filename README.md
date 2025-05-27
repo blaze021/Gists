@@ -1,4 +1,25 @@
+```
+# templates/keda-scaledobject.yaml
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "your-chart.fullname" . }}-scaler
+spec:
+  scaleTargetRef:
+    name: {{ include "your-chart.fullname" . }}
+  minReplicaCount: {{ .Values.keda.minReplicas }}
+  maxReplicaCount: {{ .Values.keda.maxReplicas }}
+  triggers:
+    - type: cpu
+      metadata:
+        type: Utilization
+        value: "{{ .Values.keda.cpuUtilization }}"
+    - type: memory
+      metadata:
+        type: Utilization
+        value: "{{ .Values.keda.memoryUtilization }}"
 
+```
 ```
 from textual.app import App, ComposeResult
 from textual.widgets import Static, Button, Header, Footer

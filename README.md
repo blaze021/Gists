@@ -1,4 +1,46 @@
 ```
+{{- $secrets := .Values.list }}
+{{- range $secret := $secrets }}
+
+---
+apiVersion: vault.banzaicloud.com/v1alpha1
+kind: VaultAuth
+metadata:
+  name: {{ $secret }}-auth
+  namespace: {{ $.Values.namespace }}
+spec:
+  method: kubernetes
+  mount: {{ $.Values.vaultMount }}
+  role: {{ $secret }}-role
+  serviceAccount: {{ $secret }}-sa
+
+---
+apiVersion: vault.banzaicloud.com/v1alpha1
+kind: VaultStaticSecret
+metadata:
+  name: {{ $secret }}-secret
+  namespace: {{ $.Values.namespace }}
+spec:
+  vaultRole: {{ $secret }}-role
+  mountPath: {{ $.Values.mountPath }}
+  type: Opaque
+  refreshInterval: "30s"
+  destination:
+    name: {{ $secret }}-k8s-secret
+    create: true
+  secrets:
+    - key: username
+      path: {{ $.Values.secretBasePath }}/{{ $secret }}
+      field: username
+    - key: password
+      path: {{ $.Values.secretBasePath }}/{{ $secret }}
+      field: password
+
+{{- end }}
+
+```
+
+```
 # templates/keda-scaledobject.yaml
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject

@@ -1,4 +1,113 @@
 ```
+Here's a **step-by-step guide** to set up an **SFTP server using Podman on your Mac**, with a **host folder mounted** into the container so you can upload/download files using SFTP.
+
+---
+
+## ✅ Goal
+
+* Set up a Podman container running an SFTP server.
+* Mount a folder from your Mac into the container.
+* Access files via SFTP.
+
+---
+
+## 🔧 1. **Prepare Folder on Mac**
+
+Choose (or create) a folder you want to expose via SFTP:
+
+```bash
+mkdir -p ~/sftp-data/upload
+```
+
+> This folder will be mounted to the container. "upload" is required by the image.
+
+---
+
+## 📦 2. **Create Podman SFTP Container**
+
+You can use the `atmoz/sftp` image which is simple and supports volume mounts:
+
+```bash
+podman run -d \
+  --name sftp-server \
+  -p 2222:22 \
+  -v ~/sftp-data:/home/foo/upload:Z \
+  atmoz/sftp \
+  foo:pass:1001
+```
+
+### 🔍 Explanation:
+
+* `-p 2222:22`: Expose container's port 22 on your Mac’s 2222.
+* `-v ~/sftp-data:/home/foo/upload:Z`: Mount `~/sftp-data` into container's `upload` folder with correct SELinux label (`:Z` is safe on Mac).
+* `foo:pass:1001`: Creates user `foo` with password `pass`.
+
+---
+
+## 🔐 3. **Connect via SFTP**
+
+Now, use any SFTP client (like `sftp`, `FileZilla`, or `Cyberduck`) or the terminal:
+
+```bash
+sftp -P 2222 foo@localhost
+```
+
+When prompted, enter the password: `pass`.
+
+---
+
+## 📁 4. **Test It**
+
+Once connected:
+
+```bash
+sftp> ls
+sftp> put somefile.txt
+sftp> get anotherfile.txt
+```
+
+The files will appear in `~/sftp-data`.
+
+---
+
+## 🚀 Optional Enhancements
+
+### ➕ Add more users
+
+You can run the container with multiple users like this:
+
+```bash
+podman run -d \
+  --name sftp-server \
+  -p 2222:22 \
+  -v ~/sftp-data:/home/foo/upload:Z \
+  atmoz/sftp \
+  foo:pass:1001 \
+  bar:barpass:1002
+```
+
+Each user will have a dedicated `/home/<user>/upload` directory.
+
+---
+
+## 🧼 Stop / Remove Container
+
+```bash
+podman stop sftp-server
+podman rm sftp-server
+```
+
+---
+
+Let me know if you'd like **SSH key-based login** or **persistent container config via Podman volumes or Compose**.
+
+
+```
+
+
+
+
+```
 {{- $secrets := .Values.list }}
 {{- range $secret := $secrets }}
 

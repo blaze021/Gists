@@ -1,3 +1,5 @@
+# Bento Streams Gateway.
+
 Got it — you basically want a **Go-based gateway** that sits in front of your Benthos streams API, which:
 
 1. Accepts incoming REST PUT requests (same shape Benthos expects).
